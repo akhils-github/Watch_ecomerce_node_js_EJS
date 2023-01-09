@@ -1,0 +1,207 @@
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        {{!-- {{#if orders}} --}}
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-3">
+                <div class="container-fluid">
+                    <h2>My Orders</h2>
+                    {{!-- <div class="row">
+                        <a href="/admin/add-product" class="btn btn-dark ml-auto mb-4" style="width: 130px;">Add
+                            Product</a>
+                    </div> --}}
+                </div>
+                {{!-- <input id="myInput" type="text" placeholder="Search Names...."
+                    class="w-50 mb-3 border-warning pl-3" style="height: 40px;border-radius: 12px;" spellcheck="false">
+                --}}
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-warning">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="form-outline w-50">
+                        <input type="search" id="myInput" class="form-control border-warning" placeholder="search.." />
+                    </div>
+                    <nav class="ml-auto" aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="/orders">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/orders/20">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/orders/30">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/orders/40">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div style="overflow-x: auto;">
+                    <font size="2" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Date</th>
+                                    {{!-- <th scope="col">Name</th> --}}
+                                    {{!-- <th scope="col">address</th> --}}
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Payment</th>
+                                    <th scope="col">View Products</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Options</th>
+                                    {{!-- <th scope="col">Invoice</th> --}}
+                                    {{!-- <th scope="col"></th> --}}
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {{#each orders}}
+                                <tr>
+                                    <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                    <td>{{this.date}}</td>
+                                    {{!-- <td>{{this.deliveryDetails.name}}</td> --}}
+                                    {{!-- <td>
+                                        {{this.deliveryDetails.address}},{{this.deliveryDetails.town}}<br>{{this.deliveryDetails.district}}<br>PIN:{{this.deliveryDetails.pincode}}<br>Mob:{{this.deliveryDetails.phone}}
+                                    </td> --}}
+                                    <td>₹ {{this.totalAmount}}</td>
+                                    <td>{{this.paymentMethod}}</td>
+                                    {{!-- <td><a href="/status-tracking/{{this._id}}"
+                                            style="text-decoration: underline;color:blue">{{this.status}}</a></td> --}}
+                                    <td><a href="/view-order-products/{{this._id}}"><i
+                                                class="fa fa-eye fa-2x ml-4 text-secondary" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td>{{this.status}}</td>
+                                    {{#if isCancelled}}
+                                    <td class="text-danger">Cancelled Successully</td>
+                                    {{else}}
+                                    {{#if isReturned}}
+                                    <td class="text-secondary">
+                                        <a href="/invoice/{{this._id}}" class="btn btn-outline-dark">Invoice</a>
+                                        Returned Successully
+                                    </td>
+                                    {{else}}
+                                    {{#if isDelivered}}
+                                    <td><a onclick="returnOrder(event)" href="/return-order/{{this._id}}"
+                                            class="btn btn-outline-dark" style="width: 5rem;">Return</a>
+                                        <a href="/invoice/{{this._id}}" class="btn btn-outline-dark">Invoice</a>
+                                    </td>
+                                    {{else}}
+                                    
+                                    <td><a onclick="cancelOrder(event)" href="/cancel-order/{{this._id}}"
+                                            class="btn btn-outline-dark">Cancel</a></td>
+                                    {{/if}}
+                                    {{/if}}
+                                    {{/if}}
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+            </div>
+
+        </div>
+        {{!-- {{else}}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="d-flex justify-content-center col-12 col-md-12">
+                        <img class=" img-fluid" src="/img/bg-img/empty-orders.png" alt="">
+                    </div>
+                    <div class="d-flex justify-content-center col-md-12">
+                        <a href="/shop" class="btn amado-btn text-center" style="">Go
+                            To Shop</a>
+                    </div>
+                </div>
+            </div>
+        {{/if}} --}}
+    </div>
+</div>
+
+{{!--
+<script>
+    function showDetails(event) {
+
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Product Descripton',
+            text: "sbdhsfbsjdsjfs sfsfhjfh fshfj",
+            confirmButtonText: 'Yes',
+            confirmButtonColor: '#ffc107'
+        })
+    }
+</script> --}}
+{{!-- data table ajax --}}
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{{!--
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    })
+</script> --}}
+<script>
+    function cancelOrder(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Cancel ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Cancelled!',
+                    'Order  Cancelled.',
+                    'success'
+                )
+                window.location = link;
+            }
+            else {
+                return false;
+            }
+        })
+    }
+</script>
+<script>
+    function returnOrder(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Return ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Returned!',
+                    'Order  Returned.',
+                    'success'
+                )
+                window.location = link;
+            }
+            else {
+                return false;
+            }
+        })
+    }
+</script>

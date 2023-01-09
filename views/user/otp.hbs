@@ -1,0 +1,83 @@
+{{!-- section-padding-100 --}}
+
+<div class="cart-table-area ml-auto">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-5 mt-5">
+        <img src="/img/core-img/men.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+      </div>
+      <div class="col-md-6 col-lg-7 d-flex align-items-center">
+        <div class="card-body p-4 p-lg-5 text-black">
+
+          <form action="/otp" method="post" id="otp">
+
+            <div class="d-flex align-items-center mb-3 pb-1">
+              {{!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i> --}}
+              <img src="/img/core-img/sfrlogo.png" class="img-fluid" style="height:60px;width:60px;" alt="">
+              <span class="h1 fw-bold mb-0">Add OTP</span>
+            </div>
+
+            <h5 class="fw-normal mb-2 pb-3" style="letter-spacing: 1px;"></h5>
+            {{#if invalidOtpError}}
+            <p class="alert alert-danger">{{invalidOtpError}}</p>
+            {{/if}}
+            {{#if otpError}}
+            <p class="alert alert-danger">{{otpError}}</p>
+            {{/if}}
+            <div class="form-outline mb-3">
+              <input type="text" name="otp" id="form2Example27" class="form-control form-control-lg"/>
+              <label class="form-label" for="form2Example27">Enter OTP
+              {{!-- <span id="demo" class="text-danger" style="padding-left: 15rem;"></span> --}}
+              </label>
+            </div>
+            <div class="form-outline mb-3">
+              <input type="number" value="{{phone}}" name="phone" id="form2Example27" class="d-none form-control form-control-lg"/>
+              <label class="form-label" for="form2Example27"></label>
+            </div>
+            <div class="pt-1">
+              <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+            </div>
+
+            {{!-- <a class="small text-muted" href="#!">Forgot password?</a>
+            <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="/login"
+                style="color: #393f81;">Login here</a></p>
+            <a href="#!" class="small text-muted">Terms of use.</a>
+            <a href="#!" class="small text-muted">Privacy policy</a> --}}
+          </form>
+          <div class="pt-1">
+              <a href="/number"><button  class="btn btn-dark btn-lg btn-block" type="submit">Resend OTP</button></a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+ 
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (6000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>

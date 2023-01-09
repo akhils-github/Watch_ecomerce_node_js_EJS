@@ -1,0 +1,51 @@
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid  ">
+        <div class="row mt-5 ">
+            <div class="col-xl-4 col-md-6">
+                <button class="btn btn-warning w-100" style="height:8rem ;" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false">product offer</button>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <button class="btn btn-warning w-100" style="height:8rem ;">Category offer</button>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <button class="btn  btn-warning w-100" style="height:8rem ;">Referrel offer</button>
+            </div>
+
+            <div class="collapse" id="collapseExample">
+                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, dolorum tenetur. Ex, aspernatur?
+                    Earum, adipisci obcaecati. Minima eius velit provident ducimus aliquam? Magni amet optio cumque,
+                    quam neque atque accusantium.</h1>
+                <div class="card card-body">
+                    <div id="address" class="shadow ps-3 pt-3 overflow-auto " style="width: 100%; height: auto;">
+                        <h2 class="btn-lg shadow me-3 text-center"> Address </h2>
+                        <div style="overflow-x: scroll;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each userAddress.address}}
+                                <tr>
+                                    <th scope="row">{{@index}}</th>
+                                    <td>{{this.name}}<br>{{this.address}}<br>{{this.town}}<br>{{this.district}}<br>{{this.state}}<br>{{this.pincode}}<br>{{this.phone}}
+                                    </td>
+                                    <td><a href="/delete-address/{{this.uniqueid}}"
+                                            onclick="return confirm('are you sure')" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

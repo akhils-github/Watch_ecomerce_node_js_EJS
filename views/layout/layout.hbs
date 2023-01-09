@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>SFR Watch</title>
+    
+    <!-- Favicon  -->
+    <link rel="icon" href="/img/core-img/logo sfr.png">
+
+    
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="/css/core-style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    {{!-- sweetalert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    {{!-- ajax-jquery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{!-- razorpay --}}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    {{!-- data table jquery --}}
+    {{!-- <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> --}}
+    {{!-- datatable js --}}
+    {{!-- <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
+    
+</head>
+
+
+{{#if admin}}
+{{>admin-header}}
+{{else}}
+{{#if order_placed}}
+{{>no-header}}
+{{else}}
+{{#if user_cart}}
+{{>no-header}}
+{{else}}
+{{#if wishlist}}
+{{>no-header}}
+{{else}}
+{{#if err}}
+{{>no-header}}
+{{else}}
+{{>user-header}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{{body}}}
+{{#if admin}}
+{{>admin-footer}}
+{{else}}
+{{#if order_placed}}
+{{>no-header}}
+{{else}}
+{{#if user_cart}}
+{{>no-header}}
+{{else}}
+{{#if wishlist}}
+{{>no-header}}
+{{else}}
+{{#if login}}
+{{>no-header}}
+{{else}}
+{{#if err}}
+{{>no-header}}
+{{else}}
+{{>user-footer}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
+
+    {{!-- cdn jquery --}}
+    <script type="/text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="/text/javascript">
+    var $ = $.noConflict(true);
+    </script>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="/js/active.js"></script>
+    {{!-- user signup validation --}}
+    <script src="/js/userSignup-validation.js"></script>
+    {{!-- ajax script --}}
+    <script src="/js/script.js"></script>
+   
+    {{#if validation}}
+    {{!-- validation cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script src="/js/admin-validation.js"></script>
+    <script src="/js/user-validation.js"></script>
+    {{/if}}
+    {{#if datatable}}
+    {{!-- datatable js --}}
+    {{!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    {{/if}}
+    {{#if zoom}}
+    {{!-- zoom --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/js/zoomsl.min.js"></script>
+    {{/if}}
+</html>

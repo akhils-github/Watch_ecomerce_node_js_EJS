@@ -1,0 +1,104 @@
+<!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
+    <div class="search-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-content">
+                    <form action="#" method="get">
+                        <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <button type="submit"><img src="/img/core-img/search.png" alt=""></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Wrapper Area End -->
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    <!-- Mobile Nav (max width 767px)-->
+    <div class="mobile-nav">
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <a href="/"><img src="/img/core-img/sfrlogo.png" alt=""></a>
+        </div>
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Header Area Start -->
+
+    <header class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/"><img  src="/img/core-img/sfrlogo.png" alt=""></a>
+        </div>
+        <!-- Amado Nav -->
+        <!-- Example single danger button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{#if user}}
+                    <i class="fa fa-user fa-1x pr-2" aria-hidden="true"></i>{{user.username}}
+                    {{else}}
+                    <i class="fa fa-user fa-1x pr-2" aria-hidden="true"></i>
+                    {{/if}}
+                </button>
+                <div class="dropdown-menu">
+                    {{#if user}}
+                    <a class="dropdown-item" href="/my-profile" class="fav-nav">Profile</a>
+                    <a class="dropdown-item" href="/logout">Logout<i class="fa fa-sign-out fa-1x pl-3" aria-hidden="true"></i></a>
+
+                    {{else}}
+                    <a class="dropdown-item" href="/login">Login<i class="fa fa-sign-in fa-1x pl-3" aria-hidden="true"></i></a>
+                    {{/if}}
+                </div>
+            </div>
+        <nav class="amado-nav">
+            <ul>
+                {{#if user}}
+                <li><a href="/">Home </a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart" class="cart-nav">Cart <span class="badge badge-warning" id="cart-count">{{cartCount}}</span></a></li>
+                <li><a href="/wishlist" class="fav-nav">Wishlist  <span class="badge badge-warning" id="wishlist-count">{{wishlistCount}}</span></a></li>
+                {{else}}
+                {{!-- <li><a href="/" class="btn btn-warning mt-3" style="width: 63px;height:68px"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a></li>
+                <li><a href="/shop"  class="btn btn-warning mt-3" style="width: 63px;height:68px"><i class="fa fa-shopping-bag fa-2x" aria-hidden="true"></i></a></li> --}}
+                <li><a href="/">Home </a></li>
+                <li><a href="/shop">Shop</a></li>
+                {{/if}}
+                {{!-- <li><a href="/">Home </a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart" class="cart-nav">Cart <span class="badge badge-warning" id="cart-count">{{cartCount}}</span></a></li>
+                <li><a href="/wishlist" class="fav-nav">Wishlist  <span class="badge badge-warning" id="wishlist-count">{{wishlistCount}}</span></a></li>
+                <li><a href="/my-profile" class="fav-nav">Profile</a></li>
+                <li><a href="/testing-purpose" class="fav-nav">Testing</a></li> --}}
+            </ul>
+        </nav>
+        <!-- Button Group -->
+        <div class="amado-btn-group mt-30 mb-100">
+            {{!-- <a href="#" class="btn amado-btn mb-15">%Discount%</a> --}}
+            {{!-- <a href="/" class="btn amado-btn active">New this week</a> --}}
+        </div>
+        <!-- Cart Menu -->
+        {{!-- <div class="cart-fav-search mb-100">
+            <a href="#" class="fav-nav"><img src="/img/core-img/favorites.png" alt=""> Favourite</a>
+            <a href="#" class="search-nav"><img src="/img/core-img/search.png" alt=""> Search</a>
+        </div> --}}
+        <!-- Social Button -->
+    </header>
+    <!-- Header Area End -->
+
+    
+
+    

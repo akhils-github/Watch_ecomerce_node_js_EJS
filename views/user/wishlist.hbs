@@ -1,0 +1,72 @@
+
+<div class="cart-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-title mt-3">
+                    <h2>Wishlist</h2>
+                </div>
+                <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each products}}
+                            <tr>
+                                <td><img style="height: 100px;width:100px;"
+                                        src="/product-image/{{this.product._id}}a.jpg" alt=""></td>
+                                <td>{{this.product.name}}</td>
+                                <td>₹ {{this.product.price}}</td>
+                                 <td>
+                                    <div class="d-flex justify-content-center">
+                                    <button class="btn btn-dark mb-3 mr-3"
+                                    onclick="addToCart('{{this.product._id}}')" style="width: 120px;">Add To
+                                    Cart</button>
+                                    <a onclick="removeWishItem('{{this.product._id}}','{{this._id}}')" style="color: #aebbc8;"><i
+                                    class="fa fa-trash fa-3x"></i></a>
+                                    </div>
+                                </td>
+                                {{!-- <td>
+                                    <button class="btn btn-dark ml-auto mb-2 mt-2"
+                                        onclick="addToCart('{{this.product._id}}')" style="width: 120px;">Add To
+                                        Cart</button>
+                                </td> --}}
+                               
+                                {{!-- <td>
+                                    <a href="delete-wishlist-item/{{this._id}}/{{this.product._id}}"
+                                        onclick="return confirm('Delete Product {{this.product.name}}')"
+                                        class="btn btn-danger">Remove</a>
+                                </td> --}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+<script>
+    function removeWishItem(proId,wishId){
+            $.ajax({
+                url:'/delete-wish-item/'+proId+'/'+wishId,
+                method:'get',
+                success:(response)=>{
+                        swal.fire(
+                        'Your Item Removed successfully',
+                        'You clicked the button!',
+                        'success'
+                        ).then(()=>{
+                        location.reload()  
+                        })
+                }
+            })
+        }
+</script>

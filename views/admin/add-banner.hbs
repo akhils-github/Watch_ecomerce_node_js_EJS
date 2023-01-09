@@ -1,0 +1,151 @@
+{{!-- image crop --}}
+
+{{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script> --}}
+
+{{!-- start  --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                    <form action="/admin/add-banner" method="post" enctype="multipart/form-data" id="add-banner">
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                            <img src="/img/core-img/sfrlogo.png" class="img-fluid" style="height:60px;width:60px;"
+                                alt="">
+                            <span class="h1 fw-bold mb-0">Add Banner</span>
+                        </div>
+                        {{#if bannerRepeatError}}
+                        <div>
+                            <p class="alert alert-danger">{{bannerRepeatError}}</p>
+                        </div>
+                        {{/if}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-outline mb-2">
+                                    <input type="text" name="name" required id="form-1"
+                                        class="form-control form-control-lg" placeholder="" minlength="3" type="text">
+                                    <label for="">Name</label>
+                                </div>
+                                <div class="form-outline mb-3">
+                                    <input type="tel" name="offer" id="" class="form-control form-control-lg"
+                                        placeholder="" />
+                                    <label class="form-label" for="form2Example27">Offer</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-outline mb-2">
+                                    <input type="text" name="subname" id="" class="form-control form-control-lg"
+                                        placeholder="" />
+                                    <input type="text" name="slide" id="" class="form-control form-control-lg"
+                                        placeholder="" hidden/>
+                                    <label class="form-label" for="form2Example17">Sub-name</label>
+                                </div>
+                                <div class="form-outline mb-2">
+                                   
+                                    <input type="file" name="image" id=""
+                                        class="form-control form-control-lg" placeholder="Thumbnail" accept="image/*" required />
+                                    <label class="form-label" for="form2Example17">Thumbnail</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-1">
+                            <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+ <!-- cropping is done here -->
+{{!-- <div id="crop">
+    <div class="vald-info" id="info"></div>
+    <h5 class="error_form text-danger" id="image1_error_message"></h5>
+    <div style="display: flex">
+        <div id="image-box1" class="image-container clr"
+            style="height:  150px; width: 400px">
+        </div>
+        <button type="button" class="btn btneds bg-dark text-white" id="crop-btn1"
+            style="display: none; width: 50%; margin: 15rem 0rem 0rem 0rem;">Crop</button>
+    </div>
+</div> --}}
+
+{{!-- <script>
+  const imagebox1 = document.getElementById("image-box1");
+  const crop_btn1 = document.getElementById("crop-btn1");
+  const input1 = document.getElementById("imgCrop1");
+
+  // When user uploads the image this event will get triggered
+  input1.addEventListener("change", () => {
+    // Getting image file object from the input variable
+    const img_data1 = input1.files[0];
+    // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+    // The new object URL represents the specified File object or Blob object.
+    const url1 = URL.createObjectURL(img_data1);
+    // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+    imagebox1.innerHTML = `<img src="${url1}" id="image1" style="width:100%;">`;
+    // Storing that cropping view image in a variable
+    const image1 = document.getElementById("image1");
+    // Displaying the image box
+    document.getElementById("image-box1").style.display = "block";
+    // Displaying the Crop buttton
+    document.getElementById("crop-btn1").style.display = "block";
+    // Hiding the Post button
+    document.getElementById("imgCrop1").style.display = "block";
+    const cropper1 = new Cropper(image1, {
+      autoCropArea: 1,
+      viewMode: 1,
+      scalable: false,
+      zoomable: false,
+      movable: false,
+      minCropBoxWidth: 50,
+      minCropBoxHeight: 50,
+    });
+    // When crop button is clicked this event will get triggered
+    crop_btn1.addEventListener("click", () => {
+      // This method coverts the selected cropped image on the cropper canvas into a blob object
+      cropper1.getCroppedCanvas().toBlob((blob) => {
+        // Gets the original image data
+        let fileInputElement1 = document.getElementById("imgCrop1");
+        // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+        let file1 = new File([blob], img_data1.name, {
+          type: "image/*",
+          lastModified: new Date().getTime(),
+        });
+        // Create a new container
+        let container1 = new DataTransfer();
+        // Add the cropped image file to the container
+        container1.items.add(file1);
+        // Replace the original image file with the new cropped image file
+        fileInputElement1.files = container1.files;
+        document.getElementById("imgCrop1").src = URL.createObjectURL(
+          fileInputElement1.files[0]
+        );
+        // Hide the cropper box
+        document.getElementById("image-box1").style.display = "none";
+        // Hide the crop button
+        document.getElementById("crop-btn1").style.display = "none";
+
+      });
+    });
+  });
+</script> --}}
+
+{{!-- <script>
+  function viewImage1(event) {
+    document.getElementById('viewImg1').src = URL.createObjectURL(event.target.files[0])
+    let file = event.target.files[0].name
+    let extension = file.split('.').pop()
+    if (extension == 'jpeg' || extension == 'png' || extension == 'jpg') {
+      $('#imgView3').show()
+      $('#sub').show()
+      $('#errMsg').hide()
+    }
+    else {
+      $('#sub').hide()
+      $('#errMsg').show()
+    }
+  }
+</script> --}}

@@ -1,0 +1,168 @@
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="ml-auto" style="width:74%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-5">
+                <div class="container-fluid">
+                    <div class="row">
+                        {{!-- <a href="/admin/add-product" class="btn btn-dark ml-auto mb-4" style="width: 130px;">Add
+                            Product</a> --}}
+                    </div>
+                </div>
+                <table class="table" id="viewusers">
+                    <thead class="bg-warning" >
+                        <tr>
+                            <th scope="col">No</th>
+                            {{!-- <th scope="col">Coupen Name</th> --}}
+                            <th scope="col">Coupen Code</th>
+                            <th scope="col">Offer</th>
+
+                            <th scope="col">Start</th>
+                            <th scope="col">Expiry</th>
+                            {{!-- <th scope="col">Percentage</th> --}}
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+
+                            {{!-- <th scope="col">Status</th> --}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each allCoupons}}
+                        <tr>
+                            <th scope="row" class="fs-bold">{{inc @index}}</th>
+                            <td>{{this.coupon}}</td>
+                            <td>{{this.offer}}</td>
+                            <td>{{this.starting}}</td>
+                            <td>{{this.expiry}}</td>
+                            {{!-- <td><img style="height: 50px;width:50px;" src="/product-images/{{this._id}}1.jpg" alt="">
+                            </td> --}}
+                            <td><a href="/admin/edit-coupon/{{this._id}}"><i class="fa  fa-pencil-square-o fa-3x"
+                                        aria-hidden="true"></i></a></td>
+                            {{!-- {{#if this.isActive}}
+                            <td><a href="/admin/deactivate-product/{{this._id}}"><i class="fa fa-toggle-on fa-3x text-danger"
+                                        aria-hidden="true"
+                                        onclick="return confirm('Are you sure want to Delete {{this.name}} Product')"></i></a>
+                            </td>
+                            {{else}}
+                            
+                            <td><a href="/admin/activate-product/{{this._id}}"><i class="fa fa-toggle-off fa-3x text-danger"
+                                        aria-hidden="true"
+                                        onclick="return confirm('Are you sure want to Delete {{this.name}} Product')"></i></a>
+                            </td>
+                            {{/if}} --}}
+                             <td class=""><a href="/admin/delete-coupon/{{this._id}}"><i
+                                        class="fa fa-trash fa-3x text-danger" aria-hidden="true"
+                                        onclick="return confirm('Are you sure want to Delete {{this.name}} Category')"></i></a>
+                            </td>
+                            
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <section id="add" class="p-5" >
+    <div class="half">
+        <div class="bg order-1 order-md-2" style="background-image: url('/adminLogin/images/bg_1.jpg');"></div>
+
+        <div class="contents order-2 order-md-1">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-block" id="cat">
+                                <div class="text-center mb-5">
+                                    <h3>Add new <strong>Coupon</strong></h3>
+                                    {{#if catErr}}
+                                    <p class="text-center text-danger">{{catErr}}</p>
+                                    {{/if}}
+                                </div>
+                                <form action="/admin/add-coupon" id="productPage" method="post">
+                                    {{!-- {{#if couponExist}}
+                                    <p class="text-danger">{{couponExist}}</p>
+                                    </div>
+                                    {{/if}} --}}
+                                     {{#if couponExist}}
+                                    <div class="alert alert-danger" role="alert">
+                                        This Coupon is already exist!
+                                    </div>
+                                    {{/if}}
+                                    <div class="form-group first">
+                                        <label >Coupon code</label>
+                                        <input type="text" class="form-control" required name="coupon">
+                                        <label class="pt-4">Starting Date</label>
+                                        <input type="Date" class="form-control" required name="starting" id="str">
+                                        <label class="pt-4">Expiry Date</label>
+                                        <input type="Date" class="form-control" required name="expiry" id="exp">
+                                        <label class="pt-4">Coupon Percentage</label>
+                                        <input type="text" class="form-control" required min="1" name="offer" max="95"
+                                            {{!-- onkeypress="return isNumber(event)/" --}}
+                                            >
+                                    </div>
+                                    <input type="submit" value="Add" id="prosub" class="btn btn-block btn-dark">
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </div>
+</div>
+
+
+
+
+{{!-- <script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#str').attr('min', today)
+        $('#str').change(function () {
+            let date = document.getElementById('str').value
+            $('#exp').attr('min', date)
+        })
+    })
+</script>
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script> --}}
+{{!-- data table ajax --}}
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    });
+</script>
+{{!--
+<script>
+    var addSerialNumber = function () {
+        $('#productstable').each(function (index) {
+            $(this).find('td:nth-child(1)').html(index + 1);
+        });
+    };
+    addSerialNumber();
+</script> --}}

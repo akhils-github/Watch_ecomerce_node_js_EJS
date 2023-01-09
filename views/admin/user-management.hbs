@@ -1,0 +1,180 @@
+{{!-- section-padding-100 --}}
+
+
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-4">
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-warning">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="form-outline w-50">
+                        <input type="search" id="myInput" class="form-control border-warning" placeholder="search.." />
+                    </div>
+                    <nav class="ml-auto" aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="/admin/user-management">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/user-management/20">2 <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/admin/user-management/30">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/user-management/40">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                {{!-- {{#if allUsers}} --}}
+                <div style="overflow-x: scroll;">
+                    <font size="3" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">No</th>
+                                    {{!-- <th scope="col">Customer Id</th> --}}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone No</th>
+                                    <th scope="col">Block / Unblock</th>
+                                    {{!-- <th scope="col">Delete</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {{#each allUsers}}
+                                <tr>
+                                    <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                    {{!-- <td>{{this._id}}</td> --}}
+                                    <td>{{this.username}}</td>
+                                    <td>{{this.email}}</td>
+                                    <td>{{this.mobileno}}</td>
+                                    {{!-- {{#if this.isBlocked}}
+                                    <td><a href="/admin/unblock-user/{{this._id}}"
+                                            onclick="return confirm('Are you sure want to Unblock {{this.username}}')"
+                                            style="width:8rem;" class="btn btn-warning">Unblock User</a></td>
+                                    {{else}}
+                                    <td><a href="/admin/block-user/{{this._id}}"
+                                            onclick="return confirm('Are you sure want to Block {{this.username}}')"
+                                            style="width:8rem;" class="btn btn-danger">Block User</a></td>
+                                    {{/if}}
+                                </tr>
+                                {{/each}} --}}
+
+                                {{#if this.isBlocked}}
+                                <td class="pl-5"><a href="/admin/unblock-user/{{this._id}}"
+                                        onclick="unblockUser(event)"><i class="fa fa-user-times fa-3x"
+                                            aria-hidden="true"></i></a></td>
+                                {{else}}
+                                <td class="pl-5"><a href="/admin/block-user/{{this._id}}" onclick="blockUser(event)"><i
+                                            class="fa fa-user fa-3x " aria-hidden="true"></i></a></td>
+                                {{/if}}
+                                {{!-- <td class="pl-4"><a href="/admin/delete-user/{{this._id}}"><i
+                                            class="fa fa-trash text-danger fa-3x " aria-hidden="true"
+                                            onclick="return confirm('Are you want to Delete {{this.username}}')"></i></a>
+                                </td> --}}
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+                {{!-- {{else}}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="d-flex justify-content-center col-12 col-md-12">
+                            <img class=" img-fluid" src="/img/bg-img/empty-users.png" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center col-md-12">
+                            <a href="/shop" class="btn amado-btn text-center" style="">Go
+                                To Shop</a>
+                        </div>
+                    </div>
+                </div>
+                {{/if}} --}}
+            </div>
+        </div>
+    </div>
+
+</div>
+{{!-- search bar script --}}
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{{!-- data table ajax --}}
+{{!--
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    });
+</script> --}}
+<script>
+    function blockUser(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Block this user ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Blocked!',
+                    'User  Blocked.',
+                    'success'
+                ).then(() => {
+                    window.location = link;
+                })
+            }
+            else {
+                return false;
+            }
+        })
+    }
+
+</script>
+<script>
+    function unblockUser(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Unblock this user ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Unblocked!',
+                    'User  Unblocked.',
+                    'success'
+                ).then(() => {
+                    window.location = link;
+                })
+            }
+            else {
+                return false;
+            }
+        })
+    }
+
+</script>

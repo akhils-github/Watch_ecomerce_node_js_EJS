@@ -1,0 +1,153 @@
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <div style="overflow-x: scroll;">
+                    <table class="table" id="viewusers">
+                        <thead class="bg-warning">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Offer</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">Expiry</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each CatOffers}}
+                            <tr>
+                                <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                <td>{{this.category}}</td>
+                                <td>{{this.catOfferPercentage}}</td>
+                                <td>{{this.starting}}</td>
+                                <td>{{this.expiry}}</td>
+                                <td><a href="/admin/edit-catOffer/{{this._id}}"><i
+                                            class="fa  fa-pencil-square-o fa-3x text-secondary"
+                                            aria-hidden="true"></i></a></td>
+                                <td class=""><a onclick="deleteProduct(event)"
+                                        href="/admin/delete-catOffer/{{this._id}}"><i
+                                            class="fa fa-trash fa-3x text-secondary" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mb-5">
+            <h3>Add new Category <strong>Offers</strong></h3>
+        </div>
+        <form action="/admin/category-offers" id="category-offer" method="post">
+        {{#if catOfferErr}}
+        <p class="alert alert-danger">{{catOfferErr}}</p>
+        {{/if}}
+        <div class="row">
+            <div class="col-md-6">
+                    <input list="products" name="category" class="form-control" autocomplete="off" id="product">
+                    <datalist id="products">
+                        {{#each allCategories}}
+                        <option value="{{this.category}}">
+                            {{/each}}
+                    </datalist>
+                    <label for="proList">Category List</label>
+                    <input type="Date" class="form-control"  name="starting" id="str">
+                    <label class="">Starting Date</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" onkeypress="return isNumber(event)" min="1" max="95" class="form-control" 
+                    name="catOfferPercentage">
+                <label class="">Offer Percentage</label>
+                <input type="Date" class="form-control"  name="expiry" id="exp">
+                <label class="">Expiry Date</label>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="w-50 ">
+                    <input type="submit" value="Add" id="prosub" class="btn btn-block btn-dark mt-3">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteProduct(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Delete this Category Offer ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Offer Deleted.',
+                    'success'
+                ).then(() => {
+                    window.location = link;
+                })
+            }
+            else {
+                return false;
+            }
+        })
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#str').attr('min', today)
+        $('#str').change(function () {
+            let date = document.getElementById('str').value
+            $('#exp').attr('min', date)
+        })
+    })
+</script>
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+<script>
+    var addSerialNumber = function () {
+        $('#productstable').each(function (index) {
+            $(this).find('td:nth-child(1)').html(index + 1);
+        });
+    };
+    addSerialNumber();
+</script> 
+{{!-- data table ajax --}}
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    });
+</script>

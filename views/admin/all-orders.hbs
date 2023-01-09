@@ -1,0 +1,165 @@
+<style>
+    .hide {
+        overflow: hidden;
+    }
+</style>
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        {{!-- <h2>Orders</h2> --}}
+                        <a href="/admin/sales-report" class="btn btn-dark ml-auto mb-4" style="width: 130px;">Sales
+                            report</a>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-warning">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="form-outline w-50">
+                        <input type="search" id="myInput" class="form-control border-warning"
+                            placeholder="search names.." />
+                    </div>
+                    <nav class="ml-auto" aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="/admin/all-orders">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/all-orders/20">2 <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/admin/all-orders/30">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/all-orders/40">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                {{!-- {{#if allOrderDetails}} --}}
+                <div class="hide" style="overflow-x: scroll;">
+                    <font size="2" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Payment</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">View Products</th>
+                                    <th scope="col">Options</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {{#each allOrderDetails}}
+                                <tr>
+                                    <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                    <td>{{this.date}}</td>
+                                    <td>{{this.deliveryDetails.name}}</td>
+                                    <td>₹{{this.totalAmount}}</td>
+                                    <td>{{this.paymentMethod}}</td>
+                                    <td>{{this.status}}</td>
+                                    <td><a href="/admin/view-order-details/{{this._id}}"><i
+                                                class="fa  fa-eye fa-2x ml-3 text-secondary" aria-hidden="true"></i></a>
+                                    </td>
+                                    {{#if isCancelled}}
+                                    <td class="text-danger">Cancelled Successfully</td>
+                                    {{else}}
+                                    {{#if isDelivered}}
+                                    <td class="text-success">Delivered Successfully</td>
+                                    {{else}}
+                                    {{#if isReturned}}
+                                    <td class="text-secondary">Refunded Successfully</td>
+                                    {{else}}
+                                    <td>
+                                        {{!-- <form action="/admin/order-status" method="post" class="">
+                                            <input type="text" id="id" name="orderId" class="d-none"
+                                                value="{{this._id}}">
+                                            <input type="text" id="userId" name="userId" class="d-none"
+                                                value="{{this.userId}}">
+                                            <select name="status" id="status" class="w-100 form-control "
+                                                style="display: block;">
+                                                <option value="0">Select Options</option>
+                                                <option value="shipped">shipped</option>
+                                                <option value="delivered">delivered</option>
+                                                <option value="placed">placed</option>
+                                                <option value="pending">pending</option>
+                                                <option value="cancelled">Cancel</option>
+                                            </select>
+                                            <div>
+                                                <button type="submit" class="btn btn-warning mt-2">Submit</button>
+                                            </div>
+                                        </form> --}}
+                                        <form action="/admin/order-status" method="post" class="" >
+                                            <input type="text" id="id" name="orderId" class="d-none"
+                                                value="{{this._id}}">
+                                            <input type="text" id="userId" name="userId" class="d-none"
+                                                value="{{this.userId}}">
+
+                                            <select name="status" id="status" class="w-100  form-control" style="display: inline;">
+                                                <option name="" value="{{this.status}}">{{this.status}}</option>
+
+                                                {{#if this.isShipped}}
+                                                <option style="z-index: 100;" value="Out Of Delivery">Out Of delivery</option>
+                                                <option style="z-index: 100;" value="delivered">delivered</option>
+                                                <option style="z-index: 100;" value="cancelled">Cancel</option>
+                                                {{else}}
+                                                {{#if this.isOutOfDelivery}}
+                                                <option value="delivered">delivered</option>
+                                                <option value="cancelled">Cancel</option>
+                                                {{else}}
+                                                <option value="shipped">shipped</option>
+                                                <option value="cancelled">Cancel</option>
+                                                {{/if}}
+                                                {{/if}}
+                                            </select>
+                                            <div>
+                                                <button type="submit" class="btn btn-warning mt-2">Submit</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    {{/if}}
+                                    {{/if}}
+                                    {{/if}}
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+                {{!-- {{else}}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="d-flex justify-content-center col-12 col-md-12">
+                            <img class=" img-fluid" src="/img/bg-img/empty-orders.png" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center col-md-12">
+                            <a href="/shop" class="btn amado-btn text-center" style="">Go
+                                To Shop</a>
+                        </div>
+                    </div>
+                </div>
+                {{/if}} --}}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+  {{!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> --}}
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

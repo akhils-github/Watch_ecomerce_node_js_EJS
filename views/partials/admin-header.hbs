@@ -1,0 +1,90 @@
+
+ <!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
+    <div class="search-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-content">
+                    <form action="#" method="get">
+                        <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <button type="submit"><img src="/img/core-img/search.png" alt=""></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Wrapper Area End -->
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    <!-- Mobile Nav (max width 767px)-->
+    <div class="mobile-nav">
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <a href="/admin"><img src="/img/core-img/sfrlogo.png" alt=""></a>
+        </div>
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <!-- Header Area Start -->
+
+    <header class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close"
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/admin"><img class="img-fluid" src="/img/core-img/sfrlogo.png" alt=""></a>
+        </div>
+        <!-- Amado Nav -->
+        <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{#if adminSession}}
+                    <i class="fa fa-user fa-1x pr-2" aria-hidden="true"></i>{{adminSession}}
+                    {{else}}
+                    <i class="fa fa-user fa-1x pr-2" aria-hidden="true"></i>
+                    {{/if}}
+                </button>
+                <div class="dropdown-menu">
+                    {{#if adminSession}}
+                    <a class="dropdown-item" href="/admin/logout">Logout<i class="fa fa-sign-out fa-1x pl-3" aria-hidden="true"></i></a>
+                    {{else}}
+                    <a class="dropdown-item" href="/admin/login">Login<i class="fa fa-sign-in fa-1x pl-3" aria-hidden="true"></i></a>
+                    {{/if}}
+                </div>
+            </div>
+        <nav class=" amado-nav">
+            <ul>
+                {{#if adminSession}}
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/category-management">Categories</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin/coupon-management">Coupons</a></li>
+                <li><a href="/admin/banner-management">Banners</a></li>
+                <li><a href="/admin/all-orders">Orders</a></li>
+                <li><a href="/admin/user-management">Users</a></li>
+                {{!-- <li><a href="/admin/offers-management">Offers</a></li> --}}
+                {{/if}}
+
+            </ul>
+        </nav>
+       
+      
+        <!-- Social Button -->
+        {{!-- <div class="social-info d-flex justify-content-between">
+            <a href="https://www.linkedin.com/in/safeer-sfr-55036124a" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://instagram.com/safeersfr_?igshid=YmMyMTA2M2Y=" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/sfeer.sfr" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/Mohamed30227185?t=BI5Wni7PYwV1ChMk_fTzZQ&s=08" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div> --}}
+    </header>
+    <!-- Header Area End -->
+    

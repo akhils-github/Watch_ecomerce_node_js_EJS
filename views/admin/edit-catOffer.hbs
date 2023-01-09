@@ -1,0 +1,77 @@
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="text-center mb-5 mt-3">
+            <h3>Edit Category<strong>Offers</strong></h3>
+        </div>
+        <form action="/admin/edit-catOffer/{{catOfferDetails._id}}" id="edit-categoryOffer" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" value="{{catOfferDetails.category}}" 
+                    class="form-control" required readonly name="category">
+                <label for="proList">Category</label>
+                <input type="Date" value="{{catOfferDetails.starting}}" class="form-control" required name="starting" id="str">
+                <label class="">Starting Date</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="{{catOfferDetails.catOfferPercentage}}" onkeypress="return isNumber(event)" min="1" max="95"
+                class="form-control" required name="catOfferPercentage"><label class="">Offer Percentage</label>
+                <input type="Date" value="{{catOfferDetails.expiry}}" class="form-control" required name="expiry" id="exp">
+                <label class="">Expiry Date</label>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="w-50 ">
+                    <input type="submit" value="Add" id="prosub" class="btn btn-block btn-dark mt-3">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#str').attr('min', today)
+        $('#str').change(function () {
+            let date = document.getElementById('str').value
+            $('#exp').attr('min', date)
+        })
+    })
+</script>
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+{{!-- data table ajax --}}
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    });
+</script>
+<script>
+    var addSerialNumber = function () {
+        $('#productstable').each(function (index) {
+            $(this).find('td:nth-child(1)').html(index + 1);
+        });
+    };
+    addSerialNumber();
+</script> 

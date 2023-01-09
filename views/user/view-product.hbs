@@ -1,0 +1,186 @@
+<style>
+   .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .fewStock {
+        margin-bottom: 0;
+        font-size: 12px;
+        color: #6b6b6b;
+        line-height: 1; }
+   .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .noStock {
+        margin-bottom: 0;
+        font-size: 12px;
+        color: #6b6b6b;
+        line-height: 1; }
+    .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .fewStock i {
+          color:orange;
+          font-size: 12px; }
+    .main-content-wrapper .single-product-area .single_product_desc .product-meta-data .noStock i {
+          color:red;
+          font-size: 12px; }
+</style>
+<!-- Product Details Area Start -->
+<div class="single-product-area clearfix">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-50">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="#">Watch</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{proData.category}}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/product-image/{{proData._id}}a.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(/product-image/{{proData._id}}b.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(/product-image/{{proData._id}}c.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(/product-image/{{proData._id}}d.jpg);">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img" href="/product-image/{{proData._id}}a.jpg">
+                                    <img  class="d-block w-100 zoom" src="/product-image/{{proData._id}}a.jpg" alt="First slide" id="zoom">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="/product-image/{{proData._id}}b.jpg">
+                                    <img class="d-block w-100 zoom" id="img-container" src="/product-image/{{proData._id}}b.jpg" alt="Second slide" id="zoom">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="/product-image/{{proData._id}}c.jpg">
+                                    <img class="d-block w-100 zoom" src="/product-image/{{proData._id}}c.jpg" alt="Third slide" id="zoom">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="/product-image/{{proData._id}}d.jpg">
+                                    <img class="d-block w-100 zoom" src="/product-image/{{proData._id}}d.jpg" alt="Fourth slide" id="zoom">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="single_product_desc">
+                    <!-- Product Meta Data -->
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+                        <p class="product-price">{{#if proData.actualPrice}}₹ {{proData.price}}<span> <del>₹ {{proData.actualPrice}}</del></span>{{else}}₹ {{proData.price}}{{/if}}</p>
+                        <a href="product-details.html">
+                            <h6>{{proData.name}}</h6>
+                        </a>
+                        <!-- Ratings & Review -->
+                        <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="review">
+                                <a href="#">Write A Review</a>
+                            </div>
+                        </div>
+                        <!-- Avaiable -->
+                        {{#if proData.fewStock}}
+                        {{!-- <p class="text-danger">only few available</p> --}}
+                        <p class="fewStock"><i class="fa fa-circle"></i> Only few available</p>
+                        {{else}}
+                         {{#if proData.stock}}
+                        <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                        {{/if}}
+                        {{/if}}
+                        {{#if proData.noStock}}
+                        {{!-- <p class="text-danger">Out Of Stock!</p> --}}
+                        <p class="noStock"><i class="fa fa-circle"></i> Out Of Stock</p>
+                        {{/if}}
+                    </div>
+
+                    <div class="short_overview my-5">
+                        <p>{{proData.description}}</p>
+                    </div>
+                    
+                    <!-- Add to Cart Form -->
+                    <form class="cart clearfix" action="">
+                        {{!-- <div class="cart-btn d-flex mb-50">
+                            <p>Qty</p>
+                            <div class="quantity">
+                                <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                            </div>
+                        </div> --}}
+                        <div class="d-flex mt-2">
+                        <button type="submit" name="addtocart" value="5" onclick="addToCart('{{proData._id}}')" class="btn amado-btn mb-5">Add to cart</button>
+                        {{!-- {{#if wishItem}}                           
+                        <a onclick="addToWishlist('{{proData._id}}')" id="{{proData._id}}"  style="color: grey;"><i class="fa fa-heart fa-4x ml-5 mt-3" aria-hidden="true"></i></a>
+                        {{else}}
+                        <a onclick="addToWishlist('{{proData._id}}')" id="{{proData._id}}"  style="color: red;"><i class="fa fa-heart fa-4x ml-5 mt-3" aria-hidden="true"></i></a>
+                        {{/if}} --}}
+                        {{#if wishItem}}                           
+                        <a onclick="addToWishlist('{{proData._id}}')" id="{{proData._id}}"  style="color: red;"><i class="fa fa-heart fa-4x ml-5 mt-3" aria-hidden="true"></i></a>
+                        {{else}}
+                        <a onclick="addToWishlist('{{proData._id}}')" id="{{proData._id}}"  style="color: grey;"><i class="fa fa-heart fa-4x ml-5 mt-3" aria-hidden="true"></i></a>
+                        {{/if}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.zoom').imagezoomsl({
+            zoomrange:[3,3]
+        });
+    })
+</script>
+<script>
+        function addToWishlist(proId){
+        $.ajax({
+            url:'/add-to-wishlist/'+proId,
+            method:'get',
+            success:(response)=>{
+                if(response.status === 'add'){
+                    let count = $('#wishlist-count').html()
+                    count = parseInt(count) + 1
+                    $("#wishlist-count").html(count)
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Item added to wishlist',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+                    document.getElementById(proId).style.color="red";
+                }else if(response.status === 'login'){
+                    console.log("call")
+                    location.href = '/login'
+                }else{
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Item Removed in wishlist',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+                    document.getElementById(proId).style.color="grey";
+                }
+            }
+        
+        })
+    }
+</script>

@@ -1,0 +1,61 @@
+<div class="cart-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-3 clearfix">
+                    <div class="">
+                        <h2>Add Address</h2>
+                    </div>
+                    <form action="/addAddress" method="post" id="addAddress">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <input type="text" class="form-control mb-3 d-none" name="id" id="id" value="" placeholder="Name">
+                            </div>
+                            <div class="col-md-12 mb-3 ">
+                                <input type="text" class="form-control" name="name" id="name" value=""
+                                    placeholder="Name" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control" name="address" id="address"
+                                    placeholder="Address" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control" id="town" name="town" placeholder="Town"
+                                    value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control" id="district" name="district"
+                                    placeholder="District">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control" id="state" name="state" placeholder="State"
+                                    value="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="pincode" name="pincode"
+                                    placeholder="Pin Code" value="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="phone" name="phone" min="0"
+                                    placeholder="Phone No" value="">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" id="" name="userId" min="0" value="{{user._id}}"
+                                    hidden>
+                            </div>
+                        </div>
+                        <div class="cart-btn d-flex justify-content-center">
+                            <button class="btn amado-btn btn-block mb-3" type="submit">Add</button>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+<script>
+    let uniqueId = Date.now()
+    document.getElementById("id").value = uniqueId;
+</script>

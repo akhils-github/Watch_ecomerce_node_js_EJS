@@ -1,0 +1,69 @@
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                    <form action="/admin/edit-banner" method="post" enctype="multipart/form-data" id="edit-banner">
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                            <img src="/img/core-img/sfrlogo.png" class="img-fluid" style="height:60px;width:60px;"
+                                alt="">
+                            <span class="h1 fw-bold mb-0">Edit Banner</span>
+                        </div>
+                        {{#if bannerRepeatError}}
+                        <div class="alert alert-danger">
+                            <p class="alert alert-danger">{{bannerRepeatError}}</p>
+                        </div>
+                        {{/if}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-outline mb-2">
+                                    <input type="text" name="_id" required="true" value="{{bannerDetails._id}}" id="form3Example1c" class="form-control form-control-lg d-none " />
+                                    <input type="text" name="name" required="true" value="{{bannerDetails.name}}" id="form3Example1c" class="form-control form-control-lg" />
+                                    <label for="">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-outline mb-2">
+                                    <input type="text" name="subname" id="" class="form-control form-control-lg" placeholder="" value="{{bannerDetails.subname}}" />
+                                    <label class="form-label" for="form2Example17">Sub-name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-3">
+                            <input type="tel" name="offer" id="" class="form-control form-control-lg" placeholder="" value="{{bannerDetails.offer}}" />
+                            <label class="form-label" for="form2Example27">Offer</label>
+                        </div>
+                        
+                        <div class="form-outline mb-2">
+                            <img style=" height:10rem" class="d-flex mb-3" src="/banner-images/{{bannerDetails._id}}1.jpg" alt="" id="imgView">
+                            <input type="file" name="image" id="image" class="form-control form-control-lg" onchange="viewImage(event)" />
+                            <label class="form-label" for="form2Example17">Image</label>
+                        </div>
+                        <div class="pt-1">
+                            <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+
+</script>
+
+<!-- cropping is done here -->
+{{!-- <div id="crop">
+    <div class="vald-info" id="info"></div>
+    <h5 class="error_form text-danger" id="image1_error_message"></h5>
+    <div style="display: flex">
+        <div id="image-box1" class="image-container clr" style="height: 200px; width: 20%">
+        </div>
+        <button type="button" class="btn btneds bg-dark text-white" id="crop-btn1"
+            style="display: none; width: 50%; margin: 15rem 0rem 0rem 0rem;">Crop</button>
+    </div>
+</div> --}}

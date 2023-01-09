@@ -1,0 +1,338 @@
+<div class="products-catagories-area clearfix">
+    <h1>testing purpose</h1>
+</div>
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row breadcrumb_box  align-items-center">
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-center mt-5 text-md-left">
+                        <h3 class="breadcrumb-title">CHECKOUT</h3>
+                    </div>
+                    <div class="col-lg-6  col-md-6 col-sm-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- breadcrumb-area end -->
+
+<!-- checkout area start -->
+<div class="checkout-area p-3 pb-5">
+    <div class="container">
+        <h3> Saved Address</h3>
+        <div class="row">
+            {{!-- Saveed addresses --}}
+            {{#each address}}
+            <div class="col-md-3 mt-5 alert border-warning mr-2 card" style="cursor: pointer;">
+                <div class="col-md-12">
+                    <h6 class="">{{this.FirstName}} {{this.LastName}}</h6>
+                    <p class="">{{this.House}},{{this.Street}},{{this.Town}} - {{this.PIN}}<br>Ph : {{this.Mobile}}</p>
+                    <div class="ml-auto">
+                        <button class="btn btn-warning " style="width: fit-content;"
+                            onclick="autoFill('{{this.FirstName}}','{{this.LastName}}','{{this.House}}','{{this.Street}}','{{this.Town}}','{{this.PIN}}','{{this.Mobile}}','{{this.Email}}')">
+                            Choose
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <div class="col-md-2 pt-5">
+                <a href="/addNewAddress" class="btn btn-warning "
+                    style="text-decoration: none;width:100%;margin-top:30px;">Add New Address</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="billing-info-wrap mt-3">
+                <h3>Billing Details</h3>
+                <div class="conatainer">
+                    <form action="" id="checkout-form" class="mt-3" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-row">
+                                    <div class=" form-group billing-info mb-4 col-md-6">
+                                        <label for="fname">First Name</label>
+                                        <input type="text" id="fname" name="FirstName" />
+                                    </div>
+
+                                    <div class="form-group billing-info mb-4 col-md-6">
+                                        <label for="lname">Last Name</label>
+                                        <input type="text" id="lname" name="LastName" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group billing-info mb-4 col-md-12">
+                                        <label for="house">House Name</label>
+                                        <input type="text" id="house" name="House"  />
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="form-group billing-info mb-4 col-md-12">
+                                        <label for="street">Street Address</label>
+                                        <input class="billing-address" placeholder="street name" id="street"
+                                            name="Street" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group billing-info mb-4 col-md-6">
+                                        <label for="city">Town / City</label>
+                                        <input type="text" id="city" name="Town"  />
+                                    </div>
+                                    <div class="form-group billing-info mb-4 col-md-6">
+                                        <label for="pin">Postcode / ZIP</label>
+                                        <input type="tel" id="pin" name="PIN" maxlength="6"
+                                            onkeypress="return isNumber(event)" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group billing-info mb-4 col-md-6">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" id="phone" onkeypress="return isNumber(event)" name="Mobile"
+                                            maxlength="10" />
+                                    </div>
+                                    <div class="form-group billing-info mb-4 col-md-6">
+                                        <label for="email">Email Address</label>
+                                        <input type="text" id="email" name="Email" />
+                                    </div>
+                                    <input type="text" name="User" value="{{user._id}}" hidden>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="container">
+                                    <div class="col-lg-12 mt-md-30px mt-lm-30px ">
+                                        <div class="your-order-area">
+                                            <h3>Your order</h3>
+                                            <div class="your-order-wrap gray-bg-4 pl-4 pr-4 pb-4"
+                                                style="border: 1px solid black;">
+                                                <div class="your-order-product-info">
+                                                    <div class="your-order-top">
+                                                        <ul>
+                                                            <li>
+                                                                <h4 class="p-3">Cart Items</h4>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="your-order-middle">
+                                                        <table class="table borderless">
+                                                            {{!-- Cart products --}}
+                                                            {{#each products}}
+                                                            <tr>
+                                                                <td>
+                                                                    <ol>
+                                                                        <li><span
+                                                                                class="order-middle-left">{{this.product.name}}
+                                                                                <strong>X</strong>
+                                                                                {{this.quantity}}</span> <br>
+                                                                            <span
+                                                                                class="order-price">Rs.{{this.subtotal}}
+                                                                            </span>
+                                                                        </li>
+                                                                    </ol>
+                                                                </td>
+                                                            </tr>
+                                                            {{/each}}
+                                                        </table>
+                                                        <style>
+                                                            .borderless td,
+                                                            .borderless th {
+                                                                border: none;
+                                                            }
+                                                        </style>
+                                                    </div>
+                                                    {{!-- Coupon starting --}}
+                                                    <div class="your-order-bottom">
+                                                        <div class="discount-code">
+                                                            <p>Enter your coupon code if you have one.</p>
+                                                            <input type="text" class="form-control" name="Coupon"
+                                                                id="couponInput" autocapitalize="on" />
+                                                            <input type="text" id="couponTotal" name="Total"
+                                                                value="{{total}}" hidden>
+                                                            <input type="text" id="code" name="Coupon_code" hidden>
+                                                            <a id="couponBtn" onclick="couponApply()"
+                                                                class="btn bg-success text-white text-center  mt-2"
+                                                                style="width: 100%;text-decoration: none;">Apply
+                                                                Coupon</a>
+                                                            {{!-- Error handling of coupons --}}
+                                                            <div class="mt-2">
+                                                                <div class="alert alert-danger" style="display: none;"
+                                                                    id="couponUsed" role="alert">
+                                                                    This Coupon was redeemed
+                                                                </div>
+                                                                <div class="alert alert-danger" style="display: none;"
+                                                                    id="couponInvalid" role="alert">
+                                                                    This Coupon is
+                                                                    invalid
+                                                                </div>
+                                                                <div class="alert alert-success" style="display: none;"
+                                                                    id="couponSuccess" role="alert">
+                                                                    Coupon Applied
+                                                                    Successfully
+                                                                </div>
+                                                                <div class="alert alert-warning" style="display: none;"
+                                                                    id="couponExpired" role="alert">
+                                                                    Sorry!!! Your
+                                                                    Coupon has been Expired
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="your-order-total">
+                                                        <table class="table borderless">
+                                                            <tr>
+                                                                <th>Total</th>
+                                                                <td id="">₹<span
+                                                                        id="total">{{total}}</span><span>.00</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th id="discountLabel" style="display: none;">Coupon
+                                                                    discount</th>
+                                                                <td id="discounttd" style="display: none;">
+                                                                    <input type="text" name="Discount"
+                                                                        style="display: none;" id="discount" readonly>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th id="newTotal" style="display: none;">New Total</th>
+                                                                <td id="tdTotal" style="display: none;">₹<span
+                                                                        id="totalOriginal"
+                                                                        style="display: none;">{{total}}</span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="payment-method">
+                                                    <div class="payment-accordion element-mrg">
+                                                        <div id="faq" class="panel-group">
+                                                            <h4>Payment methods</h4>
+                                                            <input type="radio" name="Payment" value="COD"
+                                                                style="width:5%;height:auto" checked>Cash on
+                                                            Delivery<br>
+                                                            <input type="radio" name="Payment" value="Razorpay"
+                                                                style="width:5%;height:auto">Razor Pay<br>
+                                                            <input type="radio" name="Payment" value="Paypal"
+                                                                style="width:5%;height:auto">Paypal
+                                                            <div id="paypal-payment-button"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Place-order mt-25">
+                                                <button class="btn btn-primary btn-hover" id="submit" type="submit"
+                                                    style="width: 100%;" href="#">Place Order</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 pt-3">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function autoFill(fname, lname, house, street, town, pin, mobile, email) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        Toast.fire({
+            icon: 'success',
+            title: 'Address selected'
+        })
+        document.getElementById('fname').value = fname
+        document.getElementById('lname').value = lname
+        document.getElementById('house').value = house
+        document.getElementById('street').value = street
+        document.getElementById('city').value = town
+        document.getElementById('pin').value = pin
+        document.getElementById('phone').value = mobile
+        document.getElementById('email').value = email
+    }
+</script>
+<script>
+    function couponApply() {
+        let couponCode = document.getElementById('couponInput').value
+        let couponTotal = document.getElementById('couponTotal').value
+        $.ajax({
+            url: '/couponApply',
+            data: {
+                Coupon: couponCode,
+                Total: couponTotal
+            },
+            method: 'post',
+            success: (response) => {
+                console.log(response)
+                if (response.couponSuccess) {
+                    let oldTotal = parseInt(document.getElementById('totalOriginal').innerHTML)
+                    let discount = oldTotal - parseInt(response.total)
+                    document.getElementById('couponInput').readOnly = true
+                    document.getElementById('discount').value = discount
+                    document.getElementById('code').value = couponCode
+                    $('#discount').show()
+                    $('#discountLabel').show()
+                    $('#discounttd').show()
+                    $('#newTotal').show()
+                    $('#tdTotal').show()
+                    $('#totalOriginal').show()
+                    document.getElementById('totalOriginal').innerHTML = response.total
+                    $('#couponSuccess').show()
+                    $('#couponUsed').hide()
+                    $('#couponInvalid').hide()
+                    $('#couponExpired').hide()
+                }
+                if (response.couponUsed) {
+                    $('#couponUsed').show()
+                    $('#couponSuccess').hide()
+                    $('#couponInvalid').hide()
+                    $('#couponExpired').hide()
+                    $('#discount').hide()
+                    $('#discountLabel').hide()
+                }
+                if (response.invalidCoupon) {
+                    $('#couponInvalid').show()
+                    $('#couponSuccess').hide()
+                    $('#couponUsed').hide()
+                    $('#couponExpired').hide()
+                    $('#discount').hide()
+                    $('#discountLabel').hide()
+                }
+                if (response.couponExpired) {
+                    $('#couponExpired').show()
+                    $('#couponSuccess').hide()
+                    $('#couponInvalid').hide()
+                    $('#couponUsed').hide()
+                    $('#discount').hide()
+                    $('#discountLabel').hide()
+                }
+            }
+        })
+    }
+</script>
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>

@@ -1,0 +1,142 @@
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+<div class="products-catagories-area clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <a href="/admin/product-offers" class="btn btn-dark ml-auto mt-2" style="width: 130px;">Product Offer</a>
+            <a href="/admin/add-product" class="btn btn-dark ml-3 mt-2" style="width: 130px;">Add Product</a>
+
+            <div class="col-12 col-lg-12 mt-3">
+                {{!-- <input id="myInput" type="text" placeholder="Search Names...."
+                    class="w-50 mb-3 border-warning pl-3" style="height: 40px;border-radius: 12px;" spellcheck="false">
+                --}}
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-warning">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="form-outline w-50">
+                        <input type="search" id="myInput" class="form-control border-warning" placeholder="search.." />
+                    </div>
+                    <nav class="ml-auto" aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="/admin/products">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/products/20">2 <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/admin/products/30">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/products/40">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                {{!-- {{#if allProducts}} --}}
+                <div style="overflow-x: scroll;">
+                    <font size="2" face="">
+                        <table class="table" id="viewusers">
+                            <thead>
+                                <tr class="bg-warning">
+                                    <th scope="col">No</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {{#each allProducts}}
+                                <tr>
+                                    <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                    <td><img style="height: 50px;width:50px;" src="/product-image/{{this._id}}a.jpg"
+                                            alt=""></td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.category}}</td>
+                                    <td>₹{{this.price}}</td>
+                                    <td>{{this.stock}} left</td>
+                                    {{!-- <td>{{this.description}}</td> --}}
+                                    <td><a href="/admin/show-description/{{this._id}}"><i
+                                                class="fa  fa-eye fa-2x text-secondary pl-3" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td><a href="/admin/edit-product/{{this._id}}"><i
+                                                class="fa  fa-pencil-square-o fa-2x text-secondary"
+                                                aria-hidden="true"></i></a></td>
+                                    <td><a href="/admin/delete-product/{{this._id}}" onclick="deleteProduct(event)"><i
+                                                class="fa fa-trash fa-2x text-secondary" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </font>
+                </div>
+                {{!-- {{else}}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="d-flex justify-content-center col-12 col-md-12">
+                            <img class=" img-fluid" src="/img/bg-img/empty-products.png" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center col-md-12">
+                            <a href="/shop" class="btn amado-btn text-center" style="">Go
+                                To Shop</a>
+                        </div>
+                    </div>
+                </div>
+                {{/if}} --}}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{!-- data table ajax --}}
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{{!--
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        $('#viewusers').DataTable();
+    })
+</script> --}}
+<script>
+    function deleteProduct(event) {
+        event.preventDefault();
+        var link = event.currentTarget.href;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Delete this Product ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Product  Deleted.',
+                    'success'
+                ).then(() => {
+                    window.location = link;
+                })
+            }
+            else {
+                return false;
+            }
+        })
+    }
+</script>
