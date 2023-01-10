@@ -6,8 +6,8 @@ const state = {
 module.exports.connect = function (done) {
    // const url = "mongodb://localhost:27017";
   const url = process.env.DB_URL;
-  const dbname = "sfrWatch";
-   
+  const dbname = "sfrecom";
+  console.log(url)
   mongoClient.connect(url, (err, data) => {
     if (err) return done(err);
     state.db = data.db(dbname);
