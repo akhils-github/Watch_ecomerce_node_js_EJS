@@ -462,8 +462,8 @@ module.exports = {
           payment_method: "paypal",
         },
         redirect_urls: {
-          return_url: "https://sfrwatch.tk/order-placed",
-          cancel_url: "https://sfrwatch.tk/place-order",
+          return_url: "https://sfr.onrender.com/order-placed",
+          cancel_url: "https://sfr.onrender.com/place-order",
         },
         transactions: [
           {
